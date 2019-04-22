@@ -34,7 +34,7 @@ namespace IdentityServerService.Client
                         "role",
                         "customAPI.write"
                     },
-                    PostLogoutRedirectUris = { "http://localhost:58177/" },
+                    PostLogoutRedirectUris = { "http://localhost:58177/" }
                     
                 }
             };
