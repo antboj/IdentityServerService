@@ -22,7 +22,7 @@ namespace IdentityServerService
         {
             services.AddIdentityServer()
                 .AddInMemoryClients(Clients.Get())
-                .AddInMemoryIdentityResources(Resource.Resources.GetIdentityResources())
+                .AddInMemoryIdentityResources(Resource.Resources.GetIdentityResources()) //iz koda, ne u bazu
                 .AddInMemoryApiResources(Resource.Resources.GetApiResources())
                 .AddTestUsers(Users.Get())
                 .AddDeveloperSigningCredential();

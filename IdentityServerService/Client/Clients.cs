@@ -8,13 +8,17 @@ namespace IdentityServerService.Client
     {
         public static IEnumerable<IdentityServer4.Models.Client> Get()
         {
-            return new List<IdentityServer4.Models.Client> {
-                new IdentityServer4.Models.Client {
+            return new List<IdentityServer4.Models.Client>
+            {
+                new IdentityServer4.Models.Client
+                {
                     ClientId = "oauthClient",
                     ClientName = "Example Client Credentials Client Application",
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    ClientSecrets = new List<Secret> {
-                        new Secret("superSecretPassword".Sha256())},
+                    ClientSecrets = new List<Secret>
+                    {
+                        new Secret("superSecretPassword".Sha256())
+                    },
                     AllowedScopes = new List<string> {"customAPI.read"}
                 },
                 new IdentityServer4.Models.Client
@@ -22,10 +26,12 @@ namespace IdentityServerService.Client
                     ClientId = "mvcApp",
                     ClientName = "Other Client to connect",
                     // Tip aplikacije | Kako aplikacija komunicira sa token serverom
+
                     // Implicit = samo putem browsera
-                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowedGrantTypes = GrantTypes.Hybrid,
+                    ClientSecrets = {new Secret("secret".Sha256())},
                     //RequireConsent = false,
-                    RedirectUris = { "http://localhost:58177/signin-oidc"},
+                    RedirectUris = {"http://localhost:58177/signin-oidc"},
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
@@ -34,7 +40,8 @@ namespace IdentityServerService.Client
                         "role",
                         "customAPI.write"
                     },
-                    PostLogoutRedirectUris = { "http://localhost:58177/signout-callback-oidc" }
+                    PostLogoutRedirectUris = {"http://localhost:58177/signout-callback-oidc"},
+                    AllowOfflineAccess = true
                 }
             };
         }

@@ -14,7 +14,7 @@ namespace IdentityServerService.Resource
                 new IdentityResource {
                     Name = "role",
                     UserClaims = new List<string> {"role"}
-                }
+                },
             };
         }
 

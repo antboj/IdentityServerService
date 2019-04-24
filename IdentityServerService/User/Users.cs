@@ -16,7 +16,9 @@ namespace IdentityServerService.User
                     Password = "andrej123",
                     Claims = new List<Claim> {
                         new Claim(JwtClaimTypes.Email, "an@drej.com"),
-                        new Claim(JwtClaimTypes.Role, "admin")
+                        new Claim(JwtClaimTypes.Role, "admin"),
+                        new Claim(JwtClaimTypes.Name, "andrej")
+
                     }
                 }
             };
