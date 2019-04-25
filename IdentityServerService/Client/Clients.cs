@@ -26,8 +26,7 @@ namespace IdentityServerService.Client
                     ClientId = "mvcApp",
                     ClientName = "Other Client to connect",
                     // Tip aplikacije | Kako aplikacija komunicira sa token serverom
-
-                    // Implicit = samo putem browsera
+                    // Implicit = samo putem browsera | FrontChannel
                     AllowedGrantTypes = GrantTypes.Hybrid,
                     ClientSecrets = {new Secret("secret".Sha256())},
                     //RequireConsent = false,
