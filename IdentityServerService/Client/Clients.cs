@@ -29,7 +29,7 @@ namespace IdentityServerService.Client
                     // Implicit = samo putem browsera | FrontChannel
                     AllowedGrantTypes = GrantTypes.Hybrid,
                     ClientSecrets = {new Secret("secret".Sha256())},
-                    //RequireConsent = false,
+                    RequireConsent = false,
                     RedirectUris = {"http://localhost:58177/signin-oidc"},
                     AllowedScopes = new List<string>
                     {
@@ -39,8 +39,26 @@ namespace IdentityServerService.Client
                         "role",
                         "customAPI.write"
                     },
+                    FrontChannelLogoutUri = "http://localhost:58177/signout-oidc",
                     PostLogoutRedirectUris = {"http://localhost:58177/signout-callback-oidc"},
                     AllowOfflineAccess = true
+                },
+                new IdentityServer4.Models.Client
+                {
+                    ClientId = "officeBoilerProject",
+                    ClientName = "MVC Office ",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    ClientSecrets = {new Secret("secret".Sha256())},
+                    RequireClientSecret = false,
+                    RedirectUris = {"http://localhost:5000/signin-oidc"},
+                    FrontChannelLogoutUri = "http://localhost:5000/signout-oidc",
+                    PostLogoutRedirectUris = {"http://localhost:5000/signout-callback-oidc"},
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email
+                    }
                 }
             };
         }
