@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading.Tasks;
+using Abp.AspNetCore.Mvc.Controllers;
 
 namespace IdentityServer4.Quickstart.UI
 {
@@ -20,7 +21,7 @@ namespace IdentityServer4.Quickstart.UI
     /// </summary>
     [SecurityHeaders]
     [Authorize]
-    public class ConsentController : Controller
+    public class ConsentController : AbpController
     {
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IClientStore _clientStore;

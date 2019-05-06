@@ -8,12 +8,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
+using Abp.AspNetCore.Mvc.Controllers;
 
 namespace IdentityServer4.Quickstart.UI
 {
     [SecurityHeaders]
     [AllowAnonymous]
-    public class HomeController : Controller
+    public class HomeController : AbpController
     {
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IHostingEnvironment _environment;

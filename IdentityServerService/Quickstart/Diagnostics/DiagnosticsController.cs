@@ -4,6 +4,7 @@
 
 using System.Linq;
 using System.Threading.Tasks;
+using Abp.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ namespace IdentityServer4.Quickstart.UI
 {
     [SecurityHeaders]
     [Authorize]
-    public class DiagnosticsController : Controller
+    public class DiagnosticsController : AbpController
     {
         public async Task<IActionResult> Index()
         {

@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Abp.AspNetCore.Mvc.Controllers;
 
 namespace IdentityServer4.Quickstart.UI
 {
@@ -26,7 +27,8 @@ namespace IdentityServer4.Quickstart.UI
     /// </summary>
     [SecurityHeaders]
     [AllowAnonymous]
-    public class AccountController : Controller
+    public class AccountController : AbpController
+
     {
         private readonly TestUserStore _users;
         private readonly IIdentityServerInteractionService _interaction;

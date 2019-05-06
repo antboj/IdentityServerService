@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using Abp.AspNetCore.Mvc.Controllers;
 using IdentityModel;
 using IdentityServer4.Events;
 using IdentityServer4.Quickstart.UI;
@@ -19,7 +20,7 @@ namespace IdentityServer4.Quickstart.UI
 {
     [SecurityHeaders]
     [AllowAnonymous]
-    public class ExternalController : Controller
+    public class ExternalController : AbpController
     {
         private readonly TestUserStore _users;
         private readonly IIdentityServerInteractionService _interaction;

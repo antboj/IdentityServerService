@@ -2,15 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Abp.AspNetCore;
+using Abp.Castle.Logging.Log4Net;
+using Abp.IdentityServer4;
+using Castle.Facilities.Logging;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
 using IdentityServer4.Validation;
 using IdentityServerService.Client;
-using IdentityServerService.User;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using TestProject.Authorization.Users;
+using TestProject.EntityFrameworkCore;
+using TestProject.Identity;
 
 namespace IdentityServerService
 {
@@ -18,17 +24,26 @@ namespace IdentityServerService
     {
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            IdentityRegistrar.Register(services);
+
+            services.AddMvc();
+
             services.AddIdentityServer()
                 .AddInMemoryClients(Clients.Get())
                 .AddInMemoryIdentityResources(Resource.Resources.GetIdentityResources()) //iz koda, ne u bazu
                 .AddInMemoryApiResources(Resource.Resources.GetApiResources())
-                .AddTestUsers(Users.Get())
-                .AddDeveloperSigningCredential();
-                //.AddInMemoryApiResources(Resources.GetApiResources());
+                .AddDeveloperSigningCredential()
+                .AddAbpPersistedGrants<TestProjectDbContext>()
+                .AddAbpIdentityServer<User>();
 
-            services.AddMvc();
+            return services.AddAbp<IdentityServerServiceModule>(
+                // Configure Log4Net logging
+                options => options.IocManager.IocContainer.AddFacility<LoggingFacility>(
+                    f => f.UseAbpLog4Net().WithConfig("log4net.config")
+                )
+            );
         }
 
 
@@ -40,6 +55,7 @@ namespace IdentityServerService
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseAbp();
             
             app.UseStaticFiles();
             app.UseIdentityServer();

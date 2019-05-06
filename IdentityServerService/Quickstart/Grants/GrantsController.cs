@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Abp.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
@@ -19,7 +20,7 @@ namespace IdentityServer4.Quickstart.UI
     /// </summary>
     [SecurityHeaders]
     [Authorize]
-    public class GrantsController : Controller
+    public class GrantsController : AbpController
     {
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IClientStore _clients;
