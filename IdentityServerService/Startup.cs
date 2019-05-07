@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Abp.AspNetCore;
 using Abp.Castle.Logging.Log4Net;
 using Abp.IdentityServer4;
 using Castle.Facilities.Logging;
-using IdentityServer4.Models;
-using IdentityServer4.Test;
-using IdentityServer4.Validation;
 using IdentityServerService.Client;
+using IdentityServerService.Resource;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using TestProject.Authorization.Users;
 using TestProject.EntityFrameworkCore;
@@ -32,8 +26,8 @@ namespace IdentityServerService
 
             services.AddIdentityServer()
                 .AddInMemoryClients(Clients.Get())
-                .AddInMemoryIdentityResources(Resource.Resources.GetIdentityResources()) //iz koda, ne u bazu
-                .AddInMemoryApiResources(Resource.Resources.GetApiResources())
+                .AddInMemoryIdentityResources(Resources.GetIdentityResources()) //iz koda, ne u bazu
+                .AddInMemoryApiResources(Resources.GetApiResources())
                 .AddDeveloperSigningCredential()
                 .AddAbpPersistedGrants<TestProjectDbContext>()
                 .AddAbpIdentityServer<User>();
@@ -50,23 +44,18 @@ namespace IdentityServerService
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
             app.UseAbp();
-            
+
             app.UseStaticFiles();
             app.UseIdentityServer();
             app.UseMvcWithDefaultRoute();
 
-            app.Run(async (context) =>
+            app.Run(async context =>
             {
                 //await context.Response.WriteAsync("Hello World!");
             });
-
-            
         }
     }
 }
