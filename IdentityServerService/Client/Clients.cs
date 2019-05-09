@@ -30,7 +30,7 @@ namespace IdentityServerService.Client
                     AllowedGrantTypes = GrantTypes.Hybrid,
                     ClientSecrets = {new Secret("secret".Sha256())},
                     RequireConsent = false,
-                    RedirectUris = {"http://localhost:58177/signin-oidc"},
+                    RedirectUris = new List<string>{"http://localhost:58177/signin-oidc"},
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
@@ -50,9 +50,9 @@ namespace IdentityServerService.Client
                     AllowedGrantTypes = GrantTypes.Implicit,
                     ClientSecrets = {new Secret("secret".Sha256())},
                     RequireClientSecret = false,
-                    RedirectUris = {"http://localhost:5000/signin-oidc"},
-                    FrontChannelLogoutUri = "http://localhost:5000/signout-oidc",
-                    PostLogoutRedirectUris = {"http://localhost:5000/signout-callback-oidc"},
+                    RedirectUris = {"http://127.0.0.1:5000/signin-oidc"},
+                    FrontChannelLogoutUri = "http://127.0.0.1:5000/signout-oidc",
+                    PostLogoutRedirectUris = {"http://127.0.0.1:5000/signout-callback-oidc"},
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,

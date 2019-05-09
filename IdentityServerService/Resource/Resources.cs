@@ -12,11 +12,11 @@ namespace IdentityServerService.Resource
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
                 new IdentityResources.Email(),
-                //new IdentityResource
-                //{
-                //    Name = "role",
-                //    UserClaims = new List<string> {"role"}
-                //}
+                new IdentityResource
+                {
+                    Name = "role",
+                    UserClaims = new List<string> {"role"}
+                }
             };
         }
 

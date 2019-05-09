@@ -118,7 +118,7 @@ namespace IdentityServerService.Quickstart.Account
                 if (validated)
                 {
                     //var user = _store.FindByNameAsync(model.Username);
-                    await _events.RaiseAsync(new UserLoginSuccessEvent(user.Result.UserName, user.Result.Password, user.Result.Name));
+                    await _events.RaiseAsync(new UserLoginSuccessEvent(user.Result.UserName, user.Result.Id.ToString(), user.Result.Name));
 
                     // only set explicit expiration here if user chooses "remember me". 
                     // otherwise we rely upon expiration configured in cookie middleware.
@@ -131,7 +131,7 @@ namespace IdentityServerService.Quickstart.Account
                         };
 
                     // issue authentication cookie with subject ID and username
-                    await HttpContext.SignInAsync(user.Result.Password, user.Result.UserName, props);
+                    await HttpContext.SignInAsync(user.Result.Id.ToString(), user.Result.UserName, props);
 
                     if (context != null)
                     {

@@ -3,6 +3,7 @@ using Abp.AspNetCore;
 using Abp.Castle.Logging.Log4Net;
 using Abp.IdentityServer4;
 using Castle.Facilities.Logging;
+using IdentityServer4.Services;
 using IdentityServerService.Client;
 using IdentityServerService.Resource;
 using Microsoft.AspNetCore.Builder;
@@ -21,7 +22,7 @@ namespace IdentityServerService
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             IdentityRegistrar.Register(services);
-
+            
             services.AddMvc();
 
             services.AddIdentityServer()
@@ -31,6 +32,8 @@ namespace IdentityServerService
                 .AddDeveloperSigningCredential()
                 .AddAbpPersistedGrants<TestProjectDbContext>()
                 .AddAbpIdentityServer<User>();
+                //.AddProfileService<MyProfileService>();
+                //.AddProfileService<MyProfileService>();
 
             return services.AddAbp<IdentityServerServiceModule>(
                 // Configure Log4Net logging
